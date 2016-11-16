@@ -1,7 +1,7 @@
 CONFIG = {
     'working_dir': '/home/box/web/ask',
     'environment': {
-        'PYTHONPATH': '/usr/lib/python3/dist-packages'
+        'PYTHONPATH': '/home/ilya/anaconda3/envs/test/lib/python3.4/site-packages'
     },
     'args': (
         '--bind=0.0.0.0:8000',

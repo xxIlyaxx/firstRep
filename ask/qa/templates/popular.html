@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Новые вопросы</title>
+    <title>Популярные вопросы</title>
 </head>
 <body>
 <div class="questions-wrap">
@@ -15,13 +15,13 @@
     <nav>
         <ul class="pagination">
             {% for p in paginator.page_range %}
-                {% if p == page.number %}
-                    <li class="active">
+            {% if p == page.number %}
+            <li class="active">
                 {% else %}
-                    <li>
+            <li>
                 {% endif %}
-                    <a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>
-                </li>
+                <a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>
+            </li>
             {% endfor %}
         </ul>
     </nav>

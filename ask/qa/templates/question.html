@@ -7,6 +7,23 @@
 <body>
 <h1>{{ question.title }}</h1>
 <p>{{ question.text }}</p>
+<div class="answer-form">
+    {% for e in form.non_field_errors %}
+    <div class="alert alert-danger">{{ e }}</div>
+    {% endfor %}
+    <form action="/answer" method="POST">
+        {% for field in form %}
+        <div class="control-group">
+            {{ field.label }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        {% csrf_token %}
+        <div class="form-action">
+            <input type="submit" value="Отправить" class="bnt btn-primary">
+        </div>
+    </form>
+</div>
 <div class="answers">
     <ul>
         {% for answer in answers %}

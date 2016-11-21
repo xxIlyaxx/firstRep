@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый вопрос</title>
+</head>
+<body>
+<h1>Введите ваш вопрос</h1>
+<form action="/ask/" method="POST">
+    {% for field in form %}
+    <div>
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+    </div>
+    {% endfor %}
+    {% csrf_token %}
+    <input type="submit" value="Отправить">
+</form>
+</body>
+</html>

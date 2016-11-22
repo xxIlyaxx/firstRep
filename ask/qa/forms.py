@@ -18,15 +18,18 @@ class AskForm(forms.Form):
             raise forms.ValidationError('Field is not filled')
         return text
 
+    def clean(self):
+        return self.cleaned_data
+
     def save(self):
-        question = Question(author_id=1, **self.cleaned_data)
+        question = Question(**self.cleaned_data)
         question.save()
         return question
 
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
-    question_id = forms.CharField()
+    question = forms.IntegerField()
 
     def clean_text(self):
         text = self.cleaned_data['text']
@@ -36,12 +39,15 @@ class AnswerForm(forms.Form):
 
     def clean_question_id(self):
         try:
-            question = Question.objects.get(id=self.cleaned_data['question_id'])
+            question = Question.objects.get(id=self.cleaned_data['question'])
         except Question.DoesNotExist:
             raise forms.ValidationError('The question does not exist')
         return question.id
 
+    def clean(self):
+        return self.cleaned_data
+
     def save(self):
-        answer = Answer(author_id=1, **self.cleaned_data)
+        answer = Answer(**self.cleaned_data)
         answer.save()
         return answer

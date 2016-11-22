@@ -7,6 +7,7 @@ ln -s /home/box/web/etc/ask.py /etc/gunicorn.d/ask.py
 /etc/init.d/gunicorn restart
 /etc/init.d/mysql start
 mysql -uroot -e "CREATE DATABASE ask"
+/home/box/web/ask/manage.py syncdb
 #mysql -uroot -e "CREATE USER 'user'@'localhost' IDENTIFIED BY 'password'"
 #mysql -uroot -e "GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost'"
 #mysql -uroot -e "FLUSH PRIVILEGES"

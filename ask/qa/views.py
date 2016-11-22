@@ -82,7 +82,7 @@ def answer(request):
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save()
-            return HttpResponseRedirect('/question/' + str(answer.question_id) + '/')
+            return HttpResponseRedirect('/question/' + str(answer.question) + '/')
     return HttpResponseRedirect('/')
 
 

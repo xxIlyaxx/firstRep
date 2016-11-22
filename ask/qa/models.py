@@ -17,7 +17,7 @@ class Question(models.Model):
     text = models.TextField(blank=False)
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, default=1)
     likes = models.ManyToManyField(User, related_name='+')
     objects = QuestionManager()
 
@@ -29,7 +29,7 @@ class Answer(models.Model):
     text = models.TextField(blank=False)
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(Question)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, default=1)
 
     def __unicode__(self):
         return self.text

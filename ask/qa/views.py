@@ -54,7 +54,7 @@ def question(request, id):
     except Question.DoesNotExist:
         raise Http404
 
-    form = AnswerForm(initial={'question_id': passedId})
+    form = AnswerForm(initial={'question': passedId})
 
 
     return render(request, 'question.html', {
@@ -82,7 +82,7 @@ def answer(request):
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save()
-            return HttpResponseRedirect('/question/' + str(answer.question) + '/')
+            return HttpResponseRedirect('/question/' + str(answer.question_id) + '/')
     return HttpResponseRedirect('/')
 
 

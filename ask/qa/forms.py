@@ -37,7 +37,7 @@ class AnswerForm(forms.Form):
             raise forms.ValidationError('Field is not filled')
         return text
 
-    def clean_question_id(self):
+    def clean_question(self):
         try:
             question = Question.objects.get(id=self.cleaned_data['question'])
         except Question.DoesNotExist:
@@ -48,6 +48,6 @@ class AnswerForm(forms.Form):
         return self.cleaned_data
 
     def save(self):
-        answer = Answer(**self.cleaned_data)
+        answer = Answer(text=self.cleaned_data['text'], question_id=self.cleaned_data['question'])
         answer.save()
         return answer

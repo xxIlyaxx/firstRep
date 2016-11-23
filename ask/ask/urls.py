@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'qa.views.main'),
-    url(r'^login\/?$', 'qa.views.login', name='login'),
+    url(r'^login\/?$', 'qa.views.log_in', name='login'),
     url(r'^signup\/?$', 'qa.views.signup', name='signup'),
     url(r'^question\/(?P<id>\d+)\/?$', 'qa.views.question', name='question'),
     url(r'^ask\/?$', 'qa.views.ask', name='ask'),

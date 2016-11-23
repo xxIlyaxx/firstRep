@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp</title>
+</head>
+<body>
+<form action="/signup/" method="POST">
+    {% for field in form %}
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% endfor %}
+    {% csrf_token %}
+    <input type="submit" value="Send">
+</form>
+<!--<form action="/signup/" method="POST">-->
+    <!--<label for="username">Username:</label>-->
+    <!--<input type="text" name="username" id="username">-->
+    <!--<label for="email">Email:</label>-->
+    <!--<input type="email" name="email" id="email">-->
+    <!--<label for="password">Password:</label>-->
+    <!--<input type="password" name="password" id="password">-->
+    <!--{% csrf_token %}-->
+    <!--<input type="submit" value="Send">-->
+<!--</form>-->
+</body>
+</html>

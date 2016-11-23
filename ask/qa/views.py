@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 # from ask.qa.models import *
 # from ask.qa.forms import *
 from qa.models import *
@@ -68,6 +70,7 @@ def ask(request):
     if request.method == 'POST':
         form = AskForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             question = form.save()
             return HttpResponseRedirect('/question/' + str(question.id) + '/')
     else:
@@ -81,9 +84,34 @@ def answer(request):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             answer = form.save()
             return HttpResponseRedirect('/question/' + str(answer.question_id) + '/')
     return HttpResponseRedirect('/')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    form = SignupForm()
+    return render(request, 'signup.html', {
+        'form': form,
+    })
+
+
+def log_in(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.login(request)
+            return HttpResponseRedirect('/')
+    form = LoginForm()
+    return render(request, 'login.html', {
+        'form': form,
+    })
 
 
 def test(request, *args, **kwargs):
